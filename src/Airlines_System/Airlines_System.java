@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author otweyo brian wilson
  */
 public class Airlines_System extends javax.swing.JFrame {
-    Connection conn = null;
+    Connection conn = null; 
     PreparedStatement pst = null;
     ResultSet rs = null;
     DefaultTableModel model = new DefaultTableModel();
@@ -32,8 +32,13 @@ public class Airlines_System extends javax.swing.JFrame {
      */
     public Airlines_System() {
         initComponents();
-        
+         
+        Object col[] =  {"Date", "FlightNo", "Reg", "Aircraft", "Stl", "Atd", "Delmin", "J1","W1", "F1", "J2", "W2", "F2", "Pieces", "Kg", "MHB", "FirstBag", "LastBag", "Cargo", "J3", "W3", "F3", "J4", "W4", "F4", "EB", "IU", "MUPG", "FIG", "INAD","CDC1","CDC2","TKT"};
+        model.setColumnIdentifiers(col);
+        jTable2.setModel(model);
         conn = Airlines_System.ConnectDb();
+        updateTable();
+
     }
 
     /**
@@ -57,17 +62,12 @@ public class Airlines_System extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jEB = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
@@ -78,7 +78,7 @@ public class Airlines_System extends javax.swing.JFrame {
         jMUPG = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         jIU = new javax.swing.JTextField();
-        jReturned = new javax.swing.JTextField();
+        jTKT = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -102,10 +102,8 @@ public class Airlines_System extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jDel = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jAircraft = new javax.swing.JComboBox<>();
-        jReg = new javax.swing.JComboBox<>();
-        jFlight = new javax.swing.JTextField();
+        jFlight = new javax.swing.JComboBox<>();
         jDate = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -143,21 +141,21 @@ public class Airlines_System extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
-        jTextField27 = new javax.swing.JTextField();
+        jReg1 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Airlines System");
-        setBackground(new java.awt.Color(60, 144, 118));
+        setBackground(new java.awt.Color(176, 224, 230));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("AirCraft :");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 20, 640));
@@ -173,17 +171,6 @@ public class Airlines_System extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(95, 158, 160));
-        jButton2.setText("UPDATE");
-
-        jButton3.setBackground(new java.awt.Color(95, 158, 160));
-        jButton3.setText("PRINT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -208,123 +195,26 @@ public class Airlines_System extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jButton4)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 540, 360, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Date", "FlightNo", "Reg", "Aircraft", "Std", "Atd", "Delmin", "J1", "W1", "F1", "J2", "W2", "F2", "Pieces", "Kg", "MHB", "FirstBag", "LastBag", "Cargo", "J3", "W3", "F3", "J4", "W4", "F4", "EB", "IU", "MUPG", "FIG", "Lounge"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 360, 510));
 
         jPanel2.setBackground(new java.awt.Color(176, 224, 230));
 
@@ -341,7 +231,7 @@ public class Airlines_System extends javax.swing.JFrame {
         });
 
         jLabel40.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel40.setText("RETURNED :");
+        jLabel40.setText("TKT");
 
         jINAD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jINAD.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +246,7 @@ public class Airlines_System extends javax.swing.JFrame {
         });
 
         jLabel39.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel39.setText("INAD :");
+        jLabel39.setText("INAD RETURNED :");
 
         jLabel38.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel38.setText("LOUNG FIGURE:");
@@ -400,15 +290,15 @@ public class Airlines_System extends javax.swing.JFrame {
             }
         });
 
-        jReturned.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jReturned.addActionListener(new java.awt.event.ActionListener() {
+        jTKT.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTKT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jReturnedActionPerformed(evt);
+                jTKTActionPerformed(evt);
             }
         });
-        jReturned.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTKT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jReturnedKeyTyped(evt);
+                jTKTKeyTyped(evt);
             }
         });
 
@@ -565,26 +455,11 @@ public class Airlines_System extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel26.setText("DEL mins :");
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setText("Flight No :");
-
         jAircraft.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jAircraft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CRJ1" }));
 
-        jReg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jReg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KOB", "EQU", "KDP", "KNP" }));
-
-        jFlight.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jFlight.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFlightActionPerformed(evt);
-            }
-        });
-        jFlight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jFlightKeyTyped(evt);
-            }
-        });
+        jFlight.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jFlight.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         jDate.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jDate.addActionListener(new java.awt.event.ActionListener() {
@@ -623,7 +498,7 @@ public class Airlines_System extends javax.swing.JFrame {
         jCDC1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1Mins", "2Mins" }));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel10.setText("Pa Load");
+        jLabel10.setText("Pad Load");
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel19.setText("Guest Load");
@@ -811,17 +686,11 @@ public class Airlines_System extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("J :");
 
-        jTextField27.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField27.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField27ActionPerformed(evt);
-            }
-        });
-        jTextField27.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField27KeyTyped(evt);
-            }
-        });
+        jReg1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jReg1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KOB", "EQU", "KDP", "KNP" }));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setText("AirCraft :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -834,31 +703,30 @@ public class Airlines_System extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jReg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel26))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jAircraft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel8)))
+                                .addGap(149, 149, 149)))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jStl, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jATD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(170, 170, 170)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -972,7 +840,7 @@ public class Airlines_System extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jEB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jIU, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jReturned, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTKT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jMUPG, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLounge, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jINAD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -997,7 +865,7 @@ public class Airlines_System extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(10, 10, 10)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(288, Short.MAX_VALUE)))
+                    .addContainerGap(298, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1031,26 +899,25 @@ public class Airlines_System extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel26))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel26))))
+                        .addGap(15, 15, 15))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jReg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jAircraft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jAircraft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -1148,25 +1015,113 @@ public class Airlines_System extends javax.swing.JFrame {
                             .addComponent(jLabel39))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jReturned, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel40))))
                 .addGap(184, 184, 184))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(209, 209, 209)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(589, Short.MAX_VALUE)))
+                    .addContainerGap(585, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 770));
 
+        jScrollPane2.setBackground(new java.awt.Color(176, 224, 230));
+
+        jTable2.setBackground(new java.awt.Color(176, 224, 230));
+        jTable2.setForeground(new java.awt.Color(102, 102, 102));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Date", "FlightNo", "Reg", "Aircraft", "Std", "Atd", "Delmin", "J1", "W1", "F1", "J2", "W2", "F2", "Pieces", "Kg", "MHB", "FirstBag", "LastBag", "Cargo", "J3", "W3", "F3", "J4", "W4", "F4", "EB", "IU", "MUPG", "FIG", "Lounge"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        jScrollPane2.setViewportView(jScrollPane3);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 1610, 510));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // TODO add your handling code here:
@@ -1188,47 +1143,49 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     private JFrame frame;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        frame = new JFrame("Exit");
-        if(JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit","Student Result System",
+        if(JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit","Airline Flights System",
         JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
         System.exit(0);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql="INSERT INTO Flight(Date,FlightNo,Reg,Aircraft,stl,Atd,Delmin,J1,W1,F1,J2,W2,F2,Pieces,Kg,MHB,FirstBag,LastBag,Cargo,J3,W3,F3,J4,W4,F4,EB,IU,MUPG,FIG,Lounge,CDC1,CDC2)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="INSERT INTO Flight(Date,FlightNo,Reg,Aircraft,stl,Atd,Delmin,J1,W1,F1,J2,W2,F2,Pieces,Kg,MHB,FirstBag,LastBag,Cargo,J3,W3,F3,J4,W4,F4,EB,IU,MUPG,FIG,INAD,CDC1,CDC2,TKT)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
         pst = conn.prepareStatement(sql) ;
         pst.setString(1, jDate.getText());
-        pst.setString(2, jFlight.getText());
-        pst.setString(3, (String) jReg.getSelectedItem());
+        pst.setString(2, (String) jFlight.getSelectedItem());
+        pst.setString(3, (String) jReg1.getSelectedItem());
         pst.setString(4, (String) jAircraft.getSelectedItem());
         pst.setString(5, jStl.getText());
         pst.setString(6, jATD.getText());
-        pst.setString(8, jDel.getText());
-        pst.setString(9, j1.getText());
-        pst.setString(10, w1.getText());
-        pst.setString(11, f1.getText());
-        pst.setString(12, j2.getText());
-        pst.setString(13, w2.getText());
-        pst.setString(14, f2.getText());
-        pst.setString(15, jPieces.getText());
-        pst.setString(16, jKg.getText());
-        pst.setString(17, jMHB.getText());
-        pst.setString(18, jBG1.getText());
-        pst.setString(19, jBG2.getText());
-        pst.setString(20, jCargo.getText());
-        pst.setString(21, j3.getText());
-        pst.setString(22, w3.getText());
-        pst.setString(23, f3.getText());
-        pst.setString(24, j4.getText());
-        pst.setString(25, w4.getText());
-        pst.setString(26, f4.getText());
-        pst.setString(27, jEB.getText());
-        pst.setString(28, jIU.getText());
-        pst.setString(29, jMUPG.getText());
-        pst.setString(30, jLounge.getText());
-        pst.setString(3, (String) jCDC1.getSelectedItem());
-        pst.setString(3, (String) jCDC2.getSelectedItem());
+        pst.setString(7, jDel.getText());
+        pst.setString(8, j1.getText());
+        pst.setString(9, w1.getText());
+        pst.setString(10, f1.getText());
+        pst.setString(11, j2.getText());
+        pst.setString(12, w2.getText());
+        pst.setString(13, f2.getText());
+        pst.setString(14, jPieces.getText());
+        pst.setString(15, jKg.getText());
+        pst.setString(16, jMHB.getText());
+        pst.setString(17, jBG1.getText());
+        pst.setString(18, jBG2.getText());
+        pst.setString(19, jCargo.getText());
+        pst.setString(20, j3.getText());
+        pst.setString(21, w3.getText());
+        pst.setString(22, f3.getText());
+        pst.setString(23, j4.getText());
+        pst.setString(24, w4.getText());
+        pst.setString(25, f4.getText());
+        pst.setString(26, jEB.getText());
+        pst.setString(27, jIU.getText());
+        pst.setString(28, jMUPG.getText());
+        pst.setString(29, jLounge.getText());
+        pst.setString(30, (String) jCDC1.getSelectedItem());
+        pst.setString(31, (String) jCDC2.getSelectedItem());
+        pst.setString(32, jINAD.getText());
+        pst.setString(33, jTKT.getText());
         
         pst.execute();
         JOptionPane.showMessageDialog(null,"Added to DataBase");
@@ -1239,14 +1196,6 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
         catch(Exception e){
         JOptionPane.showMessageDialog(null,e);}
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField27KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField27KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField27KeyTyped
-
-    private void jTextField27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField27ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField27ActionPerformed
 
     private void jCargoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCargoKeyTyped
         // TODO add your handling code here:
@@ -1416,19 +1365,6 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
         // TODO add your handling code here:
     }//GEN-LAST:event_jDateActionPerformed
 
-    private void jFlightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFlightKeyTyped
-        // TODO add your handling code here:
-        char iNumber = evt.getKeyChar();
-        if(!(Character.isDigit(iNumber)) ||
-            (iNumber == KeyEvent.VK_BACK_SPACE) ||
-            (iNumber == KeyEvent.VK_DELETE)){
-            evt.consume();}
-    }//GEN-LAST:event_jFlightKeyTyped
-
-    private void jFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFlightActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFlightActionPerformed
-
     private void jDelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDelKeyTyped
         // TODO add your handling code here:
         char iNumber = evt.getKeyChar();
@@ -1555,18 +1491,18 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
         // TODO add your handling code here:
     }//GEN-LAST:event_f4ActionPerformed
 
-    private void jReturnedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jReturnedKeyTyped
+    private void jTKTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTKTKeyTyped
         // TODO add your handling code here:
         char iNumber = evt.getKeyChar();
         if(!(Character.isDigit(iNumber)) ||
             (iNumber == KeyEvent.VK_BACK_SPACE) ||
             (iNumber == KeyEvent.VK_DELETE)){
             evt.consume();}
-    }//GEN-LAST:event_jReturnedKeyTyped
+    }//GEN-LAST:event_jTKTKeyTyped
 
-    private void jReturnedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReturnedActionPerformed
+    private void jTKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTKTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jReturnedActionPerformed
+    }//GEN-LAST:event_jTKTActionPerformed
 
     private void jIUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jIUKeyTyped
         // TODO add your handling code here:
@@ -1636,6 +1572,54 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     /**
      * @param args the command line arguments
      */
+
+    public void  updateTable(){
+        String sql = "Select Date, FlightNo, Reg, Aircraft, Stl, Atd, Delmin, J1, W1, F1, J2, W2, F2, Pieces, Kg, MHB, FirstBag, LastBag, Cargo, J3, W3, F3, J4, W4, F4, EB, IU, MUPG, FIG, INAD,CDC1,CDC2,TKT from Flight";
+        try {
+
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            Object[] columnData = new Object[33];
+            while (rs.next()) {
+                columnData[0] = rs.getString("Date");
+                columnData[1] = rs.getString("FlightNo");
+                columnData[2] = rs.getString("Reg");
+                columnData[3] = rs.getString("Aircraft");
+                columnData[4] = rs.getString("Stl");
+                columnData[5] = rs.getString("Atd");
+                columnData[6] = rs.getString("Delmin");
+                columnData[7] = rs.getString("J1");
+                columnData[8] = rs.getString("W1");
+                columnData[9] = rs.getString("F1");
+                columnData[10] = rs.getString("J2");
+                columnData[11] = rs.getString("W2");
+                columnData[12] = rs.getString("F2");
+                columnData[13] = rs.getString("Pieces");
+                columnData[14] = rs.getString("Kg");
+                columnData[15] = rs.getString("MHB");
+                columnData[16] = rs.getString("FirstBag");
+                columnData[17] = rs.getString("LastBag");
+                columnData[18] = rs.getString("Cargo");
+                columnData[19] = rs.getString("J3");
+                columnData[20] = rs.getString("W3");
+                columnData[21] = rs.getString("F3");
+                columnData[22] = rs.getString("J4");
+                columnData[23] = rs.getString("W4");
+                columnData[24] = rs.getString("F4");
+                columnData[25] = rs.getString("EB");
+                columnData[26] = rs.getString("IU");
+                columnData[27] = rs.getString("MUPG");
+                columnData[28] = rs.getString("FIG");
+                columnData[29] = rs.getString("INAD");
+                columnData[30] = rs.getString("CDC1");
+                columnData[31] = rs.getString("CDC2");
+                columnData[32] = rs.getString("TKT");
+                model.addRow(columnData);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1682,8 +1666,6 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     private javax.swing.JTextField jBG1;
     private javax.swing.JTextField jBG2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jCDC1;
@@ -1692,7 +1674,7 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     private javax.swing.JTextField jDate;
     private javax.swing.JTextField jDel;
     private javax.swing.JTextField jEB;
-    private javax.swing.JTextField jFlight;
+    private javax.swing.JComboBox<String> jFlight;
     private javax.swing.JTextField jINAD;
     private javax.swing.JTextField jIU;
     private javax.swing.JTextField jKg;
@@ -1734,7 +1716,6 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jLounge;
     private javax.swing.JTextField jMHB;
@@ -1742,16 +1723,16 @@ this.getContentPane().setBackground(new java.awt.Color(176,224,230));        // 
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jPieces;
-    private javax.swing.JComboBox<String> jReg;
-    private javax.swing.JTextField jReturned;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jReg1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField jStl;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTKT;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField w1;
     private javax.swing.JTextField w2;
     private javax.swing.JTextField w3;
